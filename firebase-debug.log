@@ -1,0 +1,27 @@
+[debug] ----------------------------------------------------------------------
+[debug] Command:      C:\Program Files\nodejs\node.exe C:\Users\sebastian.zeleznik\AppData\Roaming\npm\node_modules\firebase-tools\bin\firebase serve
+[debug] CLI Version:  3.6.1
+[debug] Platform:     win32
+[debug] Node Version: v4.4.3
+[debug] Time:         Fri Jun 09 2017 16:17:49 GMT-0600 (Mountain Daylight Time)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/msave-5b0b0  
+ Fri Jun 09 2017 16:17:49 GMT-0600 (Mountain Daylight Time)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/msave-5b0b0/tokens  
+ Fri Jun 09 2017 16:17:49 GMT-0600 (Mountain Daylight Time)
+[debug] <<< HTTP RESPONSE 200
+[info] Starting Firebase development server...
+[info] 
+[info] Project Directory: C:\Users\sebastian.zeleznik\Desktop\cx\msave
+[debug] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/msave-5b0b0  
+ Fri Jun 09 2017 16:17:49 GMT-0600 (Mountain Daylight Time)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/241757104027/clients/_:getWebAppConfig  
+ Fri Jun 09 2017 16:17:50 GMT-0600 (Mountain Daylight Time)
+[debug] <<< HTTP RESPONSE 200
+[info] Public Directory: public
+[info] 
+[info] Server listening at: http://localhost:5000
