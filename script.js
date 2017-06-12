@@ -17,7 +17,11 @@ firebase.auth().signInWithPopup(provider).then(function (result) {
   var token = result.credential.accessToken;
   // The signed-in user info.
   var user = result.user;
-  // ...
+  
+  var dbRef = firebase.database().ref('users/' + user.uid + '/value');
+  var bigOne = document.getElementById("bigOne"); 
+  dbRef.on("value", snap => bigOne.innerText = snap.val() );
+
 }).catch(function (error) {
   // Handle Errors here.
   var errorCode = error.code;
@@ -34,6 +38,7 @@ var database = firebase.database();
 
 
 
+
 function show() {
   user = firebase.auth().currentUser;
   if (user) {
@@ -43,8 +48,16 @@ function show() {
       Name: user.email,
       gender: "Male"
      });
-
       console.log(user.email + " signed");
+
+      // Initial Values
+var starCountRef = firebase.database().ref('users/' + user.uid + '/value');
+starCountRef.on('value', function(snapshot) {
+  var data =  snapshot.val();
+  console.log(data);
+});
+
+
    
   } else {
     console.log(user + "not siggned");
@@ -53,16 +66,16 @@ function show() {
 
 
 // Reference k inputu
- var value1 = document.getElementById("value1");
+var value1 = document.getElementById("value1");
 function send() {
     
-    user = firebase.auth().currentUser;
-  if (user) {
-   
+  user = firebase.auth().currentUser;
+  if (user) {   
     firebase.database().ref('users/' + user.uid).update({
       value: value1.value,
-     });
-
+     });     
   }
-
 }
+
+
+
