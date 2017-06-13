@@ -12,15 +12,21 @@ firebase.initializeApp(config);
 // Authentication
 var provider = new firebase.auth.GoogleAuthProvider();
 
+
 firebase.auth().signInWithPopup(provider).then(function (result) {
   // This gives you a Google Access Token. You can use it to access the Google API.
   var token = result.credential.accessToken;
   // The signed-in user info.
   var user = result.user;
-  
+
+  // *** Retrive the Initial Values
   var dbRef = firebase.database().ref('users/' + user.uid + '/value');
-  var bigOne = document.getElementById("bigOne"); 
-  dbRef.on("value", snap => bigOne.innerText = snap.val() );
+  dbRef.on("value", function (snapshot) {
+    iniVal = snapshot.val();
+    console.log(iniVal);
+    document.getElementById("showval").value = iniVal;
+  });
+
 
 }).catch(function (error) {
   // Handle Errors here.
@@ -37,43 +43,16 @@ firebase.auth().signInWithPopup(provider).then(function (result) {
 var database = firebase.database();
 
 
-
-
-function show() {
+// *** Send Value to Firebase
+var typeVal = document.getElementById("typeval");
+function send() {
   user = firebase.auth().currentUser;
   if (user) {
-    
-     // Zapis do databaze
-     firebase.database().ref('users/' + user.uid).set({
-      Name: user.email,
-      gender: "Male"
-     });
-      console.log(user.email + " signed");
-
-      // Initial Values
-var starCountRef = firebase.database().ref('users/' + user.uid + '/value');
-starCountRef.on('value', function(snapshot) {
-  var data =  snapshot.val();
-  console.log(data);
-});
-
-
-   
-  } else {
-    console.log(user + "not siggned");
-  }
-}
-
-
-// Reference k inputu
-var value1 = document.getElementById("value1");
-function send() {
-    
-  user = firebase.auth().currentUser;
-  if (user) {   
-    firebase.database().ref('users/' + user.uid).update({
-      value: value1.value,
-     });     
+    var curCycleRef = document.getElementById("curcycle");
+    var curCycle = curCycleRef.options[curCycleRef.selectedIndex].value;
+    firebase.database().ref('users/' + user.uid + "/cycle").child(curCycle).update({
+      value: typeVal.value,
+    });
   }
 }
 
