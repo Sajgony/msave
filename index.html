@@ -5,8 +5,12 @@
 </head>
 
 <body>
-    
-<input id="showval" value="loading ..." style="font-weight:bold;"></input>
+
+<h2 id="name"></h2>   
+<p id="email"></p> 
+
+<div style="padding: 2rem; border: 1px dotted silver">
+Current Value: <input id="showval" value="loading ..." style="font-weight:bold;"></input>
 <select id="curcycle"name="cycle">
   <option value="1">1</option>
   <option value="2">2</option>
@@ -15,9 +19,14 @@
 </select>
 <br>
 
-
-<input id="typeval" value="" >
+Add Expanse: <input id="typeval" value="" >
 <button type="submit" onclick="send()">Send Value</button><br>
+</div>
+
+<div style="padding: 2rem; border: 1px dotted silver; margin-top: 4rem;">
+Budget: <input id="newbudget" value="" >
+<button type="submit" onclick="createCycle()">Start Cycle</button><br
+</div>
 
 
 

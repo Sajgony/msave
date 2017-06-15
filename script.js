@@ -27,6 +27,9 @@ firebase.auth().signInWithPopup(provider).then(function (result) {
     document.getElementById("showval").value = iniVal;
   });
 
+  // *** Greet Users with their email name
+  document.getElementById("name").innerText = "Welcome back " + user.displayName;
+  document.getElementById("email").innerText = user.email;
 
 }).catch(function (error) {
   // Handle Errors here.
@@ -52,9 +55,26 @@ function send() {
     var curCycle = curCycleRef.options[curCycleRef.selectedIndex].value;
     firebase.database().ref('users/' + user.uid + "/cycle").child(curCycle).update({
       value: typeVal.value,
+      id: curCycle,
     });
   }
 }
 
+// *** Create a new cycle 
+var newBudget = document.getElementById("newbudget");
+function createCycle() {
+  user = firebase.auth().currentUser;
+  if (user) {
 
-
+    var ref = firebase.database().ref('users/' + user.uid + '/cycle');
+    ref.orderByChild("id").limitToLast(1).on("child_added", function(snapshot) {
+      var cycleExist = snapshot.key;
+      if (cycleExist) {
+        console.log("cycle exists " + cycleExist)
+      }
+      else {
+        console.log("cycle doesn't exists")
+      }
+    });
+  }
+}
