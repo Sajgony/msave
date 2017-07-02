@@ -67,10 +67,15 @@ function createCycle() {
   if (user) {
 
     var ref = firebase.database().ref('users/' + user.uid + '/cycle');
-    ref.orderByChild("id").limitToLast(1).on("child_added", function(snapshot) {
+    ref.orderByChild("id").limitToLast(1).on("child_added", function (snapshot) {
       var cycleExist = snapshot.key;
       if (cycleExist) {
-        console.log("cycle exists " + cycleExist)
+        var nextCycle = parseInt(cycleExist) + 1;
+        firebase.database().ref('users/' + user.uid + "/cycle").child(nextCycle).update({
+          value: "0",
+          id: nextCycle + 1,
+        });
+        console.log("last cycle is " + cycleExist + " nextcycle is " + nextCycle)        
       }
       else {
         console.log("cycle doesn't exists")
